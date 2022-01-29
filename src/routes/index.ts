@@ -5,11 +5,11 @@ import { municipioRoutes } from './municipio.routes';
 import { pessoaRoutes } from './pessoa.routes';
 import { ufRoutes } from './uf.routes';
 
-const route = Router();
+const router = Router();
 
-route.use('/uf', ufRoutes);
-route.use('/bairro', bairroRoutes);
-route.use('/municipio', municipioRoutes);
-route.use('/pessoa', pessoaRoutes);
+router.use('/uf', ufRoutes);
+router.use('/bairro', bairroRoutes);
+router.use('/municipio', municipioRoutes);
+router.use('/pessoa', pessoaRoutes);
 
-export { route };
+export { router };
