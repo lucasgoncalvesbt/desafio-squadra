@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import { CreateUfController } from '../controllers/CreateUfController';
-import { ListAllUfController } from '../controllers/ListAllUfController';
-import { UpdateUfController } from '../controllers/UpdateUfController';
+import { CreateUfController } from '../controllers/ufControllers/CreateUfController';
+import { ListAllUfController } from '../controllers/ufControllers/FindUfController';
+import { UpdateUfController } from '../controllers/ufControllers/UpdateUfController';
 
 const ufRoutes = Router();
 

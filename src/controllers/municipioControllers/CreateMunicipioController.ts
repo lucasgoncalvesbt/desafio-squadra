@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { CreateMunicipioService } from '../services/municipioServices/CreateMunicipioService';
+import { CreateMunicipioService } from '../../services/municipioServices/CreateMunicipioService';
 
 class CreateMunicipioController {
   async handle(request: Request, response: Response): Promise<Response> {
