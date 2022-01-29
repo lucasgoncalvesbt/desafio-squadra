@@ -6,7 +6,7 @@ import { Municipio } from './Municipio';
 
 @Entity('tb_uf')
 export class Uf {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ name: 'codigo_uf' })
       codigoUF: string;
 
     @Column()
