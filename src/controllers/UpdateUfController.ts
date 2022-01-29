@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { UpdateUfService } from '../services/ufService/UpdateUfService';
+import { UpdateUfService } from '../services/ufServices/UpdateUfService';
 
 class UpdateUfController {
   async handle(request: Request, response: Response): Promise<Response> {

@@ -5,16 +5,16 @@ import {
 import { Bairro } from './Bairro';
 import { Uf } from './Uf';
 
-@Entity('tb_uf')
+@Entity('tb_municipio')
 export class Municipio {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ name: 'codigo_municipio' })
       codigoMunicipio: number;
 
     @ManyToOne(() => Uf, (uf) => uf.municipios)
     @JoinColumn({ name: 'codigo_uf' })
       uf: Uf;
 
-    @Column()
+    @Column({ name: 'codigo_uf' })
       codigoUF: number;
 
     @Column()
