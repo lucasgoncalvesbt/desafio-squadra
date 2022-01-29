@@ -7,14 +7,14 @@ import { Municipio } from './Municipio';
 
 @Entity('tb_bairro')
 export class Bairro {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ name: 'codigo_bairro' })
       codigoBairro: number;
 
     @ManyToOne(() => Municipio, (municipio) => municipio.bairros)
     @JoinColumn({ name: 'codigo_municipio' })
       municipio: Municipio;
 
-    @Column()
+    @Column({ name: 'codigo_municipio' })
       codigoMunicipio: number;
 
     @Column()
