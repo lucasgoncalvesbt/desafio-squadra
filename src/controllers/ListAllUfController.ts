@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import { FindUfByCodigoService } from '../services/FindUfByCodigoService';
-import { FindUfBySiglaService } from '../services/FindUfBySiglaService';
-import { ListAllUfService } from '../services/ListAllUfService';
+import { FindUfByCodigoService } from '../services/ufService/FindUfByCodigoService';
+import { FindUfBySiglaService } from '../services/ufService/FindUfBySiglaService';
+import { ListAllUfService } from '../services/ufService/ListAllUfService';
 
 class ListAllUfController {
   async handle(request: Request, response: Response): Promise<Response> {

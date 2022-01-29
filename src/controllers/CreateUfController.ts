@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { CreateUfService } from '../services/CreateUfService';
+import { CreateUfService } from '../services/ufService/CreateUfService';
 
 class CreateUfController {
   async handle(request: Request, response: Response): Promise<Response> {

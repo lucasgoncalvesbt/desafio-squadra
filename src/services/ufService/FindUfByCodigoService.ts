@@ -1,8 +1,8 @@
 import { getCustomRepository } from 'typeorm';
 
-import { Uf } from '../entities/Uf';
-import { AppError } from '../errors/AppError';
-import { UfRepository } from '../repository/UfRepository';
+import { Uf } from '../../entities/Uf';
+import { AppError } from '../../errors/AppError';
+import { UfRepository } from '../../repository/UfRepository';
 
 class FindUfByCodigoService {
   async execute(codigoUf: number): Promise<Uf> {

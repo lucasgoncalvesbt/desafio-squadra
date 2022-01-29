@@ -1,8 +1,8 @@
-import { getCustomRepository, ILike } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 
-import { Uf } from '../entities/Uf';
-import { AppError } from '../errors/AppError';
-import { UfRepository } from '../repository/UfRepository';
+import { Uf } from '../../entities/Uf';
+import { AppError } from '../../errors/AppError';
+import { UfRepository } from '../../repository/UfRepository';
 
 class FindUfBySiglaService {
   async execute(sigla: string): Promise<Uf> {
