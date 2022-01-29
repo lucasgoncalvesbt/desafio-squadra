@@ -10,6 +10,8 @@ export class CreateMunicipios1643410587722 implements MigrationInterface {
             name: 'codigo_municipio',
             type: 'integer',
             isPrimary: true,
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'nome',

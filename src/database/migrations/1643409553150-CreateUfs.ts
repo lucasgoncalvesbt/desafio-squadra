@@ -10,6 +10,8 @@ export class CreateUfs1643409553150 implements MigrationInterface {
             name: 'codigo_uf',
             type: 'integer',
             isPrimary: true,
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'sigla',
