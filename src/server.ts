@@ -1,10 +1,13 @@
-import express from 'express';
+import 'reflect-metadata';
+import express, { json } from 'express';
 
 import { route } from './routes';
 
+import './database';
+
 const app = express();
 
-app.use(express.json());
+app.use(json());
 
 app.use(route);
 
