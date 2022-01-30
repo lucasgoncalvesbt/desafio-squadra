@@ -23,7 +23,7 @@ class UpdatePessoaController {
       enderecos,
     });
 
-    return response.status(201).json(pessoa);
+    return response.status(200).json(pessoa);
   }
 }
 

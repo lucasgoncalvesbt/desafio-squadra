@@ -16,7 +16,7 @@ class UpdateMunicipioController {
       status,
     });
 
-    return response.status(201).json(municipio);
+    return response.status(200).json(municipio);
   }
 }
 
