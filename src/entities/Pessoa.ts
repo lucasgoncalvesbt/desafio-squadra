@@ -6,7 +6,7 @@ import { Endereco } from './Endereco';
 
 @Entity('tb_pessoa')
 export class Pessoa {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ name: 'codigo_pessoa' })
       codigoPessoa: number;
 
     @Column()
