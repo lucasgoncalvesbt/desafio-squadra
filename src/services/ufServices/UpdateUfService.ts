@@ -15,6 +15,22 @@ class UpdateUfService {
       throw new AppError('Não existe nenhuma UF com esse código', 404);
     }
 
+    const ufWithNameExists = await ufRepository.createQueryBuilder()
+      .where('LOWER(nome) = LOWER(:nome)', { nome })
+      .getOne();
+
+    const ufWithSiglaExists = await ufRepository.createQueryBuilder()
+      .where('LOWER(sigla) = LOWER(:sigla)', { sigla })
+      .getOne();
+
+    if (ufWithNameExists && ufToUpdate.codigoUF !== ufWithNameExists.codigoUF) {
+      throw new AppError('Já existe uma UF com esse nome.');
+    }
+
+    if (ufWithSiglaExists && ufToUpdate.codigoUF !== ufWithSiglaExists.codigoUF) {
+      throw new AppError('Já existe uma UF com essa sigla.');
+    }
+
     ufRepository.merge(ufToUpdate, { nome, sigla, status });
 
     const uf = await ufRepository.save(ufToUpdate);
