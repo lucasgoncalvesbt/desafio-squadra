@@ -3,6 +3,7 @@ import { getCustomRepository } from 'typeorm';
 import { IUpdatePessoaDTO } from '../../dto/IUpdatePessoaDTO';
 import { Pessoa } from '../../entities/Pessoa';
 import { AppError } from '../../errors/AppError';
+import { BairroRepository } from '../../repository/BairroRepository';
 import { EnderecoRepository } from '../../repository/EnderecoRepository';
 import { PessoaRepository } from '../../repository/PessoaRepository';
 
@@ -19,6 +20,7 @@ class UpdatePessoaService {
   }: IUpdatePessoaDTO): Promise<Pessoa> {
     const pessoaRepository = getCustomRepository(PessoaRepository);
     const enderecoRepository = getCustomRepository(EnderecoRepository);
+    const bairroRepository = getCustomRepository(BairroRepository);
 
     const pessoaToUpdate = await pessoaRepository.findOne(codigoPessoa);
 
@@ -35,11 +37,7 @@ class UpdatePessoaService {
       status,
     });
 
-    console.log('cheguei aqui');
-
     const pessoa = await pessoaRepository.save(pessoaToUpdate);
-
-    console.log('cheguei aqui');
 
     enderecos.forEach(async ({
       codigoEndereco,
@@ -51,12 +49,14 @@ class UpdatePessoaService {
     }) => {
       if (codigoEndereco) {
         const enderecoToUpdate = await enderecoRepository.findOne(codigoEndereco);
-
         if (!enderecoToUpdate) {
           throw new AppError('Não existe endereço com esse código.', 404);
         }
 
-        console.log('cheguei aqui');
+        const bairroExists = await bairroRepository.findOne(codigoBairro);
+        if (!bairroExists) {
+          throw new AppError('Não existe bairro com esse código.', 404);
+        }
 
         enderecoRepository.merge(enderecoToUpdate, {
           cep,
