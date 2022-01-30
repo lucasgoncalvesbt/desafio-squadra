@@ -25,6 +25,16 @@ class UpdateMunicipioService {
       throw new AppError('Não existe nenhuma UF com esse código', 404);
     }
 
+    const municipioWithNameInUFExists = await municipioRepository.createQueryBuilder()
+      .where('LOWER(nome) = LOWER(:nome)', { nome })
+      .andWhere('codigo_uf = :codigoUF', { codigoUF })
+      .getOne();
+
+    if (municipioWithNameInUFExists
+        && municipioWithNameInUFExists.codigoMunicipio !== municipioToUpdate.codigoMunicipio) {
+      throw new AppError('Já existe um Municipio com esse nome nessa UF.');
+    }
+
     municipioRepository.merge(municipioToUpdate, { codigoUF, nome, status });
 
     const municipio = await municipioRepository.save(municipioToUpdate);
