@@ -28,10 +28,10 @@ class UpdateMunicipioService {
     const municipioWithNameInUFExists = await municipioRepository.createQueryBuilder()
       .where('LOWER(nome) = LOWER(:nome)', { nome })
       .andWhere('codigo_uf = :codigoUF', { codigoUF })
+      .andWhere('codigo_municipio != :codigoMunicipio', { codigoMunicipio })
       .getOne();
 
-    if (municipioWithNameInUFExists
-        && municipioWithNameInUFExists.codigoMunicipio !== municipioToUpdate.codigoMunicipio) {
+    if (municipioWithNameInUFExists) {
       throw new AppError('Já existe um Municipio com esse nome nessa UF.');
     }
 

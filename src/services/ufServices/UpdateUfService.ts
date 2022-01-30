@@ -17,17 +17,19 @@ class UpdateUfService {
 
     const ufWithNameExists = await ufRepository.createQueryBuilder()
       .where('LOWER(nome) = LOWER(:nome)', { nome })
+      .andWhere('codigo_uf != :codigoUf', { codigoUf })
       .getOne();
 
     const ufWithSiglaExists = await ufRepository.createQueryBuilder()
       .where('LOWER(sigla) = LOWER(:sigla)', { sigla })
+      .andWhere('codigo_uf != :codigoUf', { codigoUf })
       .getOne();
 
-    if (ufWithNameExists && ufToUpdate.codigoUF !== ufWithNameExists.codigoUF) {
+    if (ufWithNameExists) {
       throw new AppError('Já existe uma UF com esse nome.');
     }
 
-    if (ufWithSiglaExists && ufToUpdate.codigoUF !== ufWithSiglaExists.codigoUF) {
+    if (ufWithSiglaExists) {
       throw new AppError('Já existe uma UF com essa sigla.');
     }
 

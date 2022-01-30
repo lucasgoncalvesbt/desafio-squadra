@@ -55,15 +55,15 @@ class UpdatePessoaService {
       nomeRua,
       numero,
     }) => {
+      const bairroExists = await bairroRepository.findOne(codigoBairro);
+      if (!bairroExists) {
+        throw new AppError(`Não existe bairro com o código ${codigoBairro}`, 404);
+      }
+
       if (codigoEndereco) {
         const enderecoToUpdate = await enderecoRepository.findOne(codigoEndereco);
         if (!enderecoToUpdate) {
           throw new AppError('Não existe endereço com esse código.', 404);
-        }
-
-        const bairroExists = await bairroRepository.findOne(codigoBairro);
-        if (!bairroExists) {
-          throw new AppError('Não existe bairro com esse código.', 404);
         }
 
         enderecoRepository.merge(enderecoToUpdate, {

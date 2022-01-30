@@ -23,6 +23,16 @@ class UpdateBairroService {
       throw new AppError('Não existe nenhum municipio com esse código', 404);
     }
 
+    const bairroWithNameInMunicipioExists = await bairroRepository.createQueryBuilder()
+      .where('LOWER(nome) = LOWER(:nome)', { nome })
+      .andWhere('codigo_municipio = :codigoMunicipio', { codigoMunicipio })
+      .andWhere('codigo_bairro != :codigoBairro', { codigoBairro })
+      .getOne();
+
+    if (bairroWithNameInMunicipioExists) {
+      throw new AppError('Já existe um Bairro com esse nome nesse Município.');
+    }
+
     bairroRepository.merge(bairroToUpdate, {
       codigoMunicipio,
       nome,
