@@ -37,7 +37,15 @@ class UpdatePessoaService {
       status,
     });
 
-    const pessoa = await pessoaRepository.save(pessoaToUpdate);
+    const enderecosToUpdate = await enderecoRepository.find({
+      where: { codigoPessoa: pessoaToUpdate.codigoPessoa },
+    });
+
+    enderecosToUpdate.forEach(async (endereco) => {
+      if (!enderecos.find((e) => e.codigoEndereco === endereco.codigoEndereco)) {
+        await enderecoRepository.delete(endereco.codigoEndereco);
+      }
+    });
 
     enderecos.forEach(async ({
       codigoEndereco,
@@ -74,11 +82,13 @@ class UpdatePessoaService {
           complemento,
           nomeRua,
           numero,
-          codigoPessoa: pessoa.codigoPessoa,
+          codigoPessoa: pessoaToUpdate.codigoPessoa,
         });
         await enderecoRepository.save(endereco);
       }
     });
+
+    const pessoa = await pessoaRepository.save(pessoaToUpdate);
 
     return pessoa;
   }
