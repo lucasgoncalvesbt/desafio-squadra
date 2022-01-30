@@ -32,7 +32,7 @@ class CreatePessoaService {
 
     await pessoaRepository.save(pessoa);
 
-    enderecos.map(async ({
+    const enderecosSaved = await Promise.all(enderecos.map(async ({
       cep,
       codigoBairro,
       complemento,
@@ -55,7 +55,9 @@ class CreatePessoaService {
       await enderecoRepository.save(endereco);
 
       return endereco;
-    });
+    }));
+
+    pessoa.enderecos = enderecosSaved;
 
     return pessoa;
   }

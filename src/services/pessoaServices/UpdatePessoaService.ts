@@ -47,7 +47,7 @@ class UpdatePessoaService {
       }
     });
 
-    enderecos.forEach(async ({
+    const enderecosUpdated = await Promise.all(enderecos.map(async ({
       codigoEndereco,
       cep,
       codigoBairro,
@@ -74,21 +74,24 @@ class UpdatePessoaService {
           numero,
         });
 
-        await enderecoRepository.save(enderecoToUpdate);
-      } else {
-        const endereco = enderecoRepository.create({
-          cep,
-          codigoBairro,
-          complemento,
-          nomeRua,
-          numero,
-          codigoPessoa: pessoaToUpdate.codigoPessoa,
-        });
-        await enderecoRepository.save(endereco);
+        const endereco = await enderecoRepository.save(enderecoToUpdate);
+        return endereco;
       }
-    });
+      const endereco = enderecoRepository.create({
+        cep,
+        codigoBairro,
+        complemento,
+        nomeRua,
+        numero,
+        codigoPessoa: pessoaToUpdate.codigoPessoa,
+      });
+      await enderecoRepository.save(endereco);
+
+      return endereco;
+    }));
 
     const pessoa = await pessoaRepository.save(pessoaToUpdate);
+    pessoa.enderecos = enderecosUpdated;
 
     return pessoa;
   }
