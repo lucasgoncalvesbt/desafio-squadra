@@ -9,7 +9,7 @@ import { UfRepository } from '../../repository/UfRepository';
 class UpdateMunicipioService {
   async execute({
     codigoMunicipio, codigoUF, nome, status,
-  }: IUpdateMunicipioDTO): Promise<Municipio> {
+  }: IUpdateMunicipioDTO): Promise<Municipio[]> {
     const municipioRepository = getCustomRepository(MunicipioRepository);
     const ufRepository = getCustomRepository(UfRepository);
 
@@ -37,9 +37,9 @@ class UpdateMunicipioService {
 
     municipioRepository.merge(municipioToUpdate, { codigoUF, nome, status });
 
-    const municipio = await municipioRepository.save(municipioToUpdate);
+    await municipioRepository.save(municipioToUpdate);
 
-    return municipio;
+    return municipioRepository.find();
   }
 }
 

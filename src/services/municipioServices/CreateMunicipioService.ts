@@ -7,7 +7,7 @@ import { MunicipioRepository } from '../../repository/MunicipioRepository';
 import { UfRepository } from '../../repository/UfRepository';
 
 class CreateMunicipioService {
-  async execute({ codigoUF, nome, status }: ICreateMunicipioDTO): Promise<Municipio> {
+  async execute({ codigoUF, nome, status }: ICreateMunicipioDTO): Promise<Municipio[]> {
     const municipioRepository = getCustomRepository(MunicipioRepository);
     const ufRepository = getCustomRepository(UfRepository);
 
@@ -33,7 +33,7 @@ class CreateMunicipioService {
 
     await municipioRepository.save(municipio);
 
-    return municipio;
+    return municipioRepository.find();
   }
 }
 

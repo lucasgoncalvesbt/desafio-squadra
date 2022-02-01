@@ -4,8 +4,9 @@ import { UpdateMunicipioService } from '../../services/municipioServices/UpdateM
 
 class UpdateMunicipioController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { codigoMunicipio } = request.params;
-    const { codigoUF, nome, status } = request.body;
+    const {
+      codigoMunicipio, codigoUF, nome, status,
+    } = request.body;
 
     const updateMunicipioService = new UpdateMunicipioService();
 

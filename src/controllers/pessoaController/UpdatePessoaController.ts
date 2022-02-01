@@ -5,9 +5,8 @@ import { UpdatePessoaService } from '../../services/pessoaServices/UpdatePessoaS
 
 class UpdatePessoaController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { codigoPessoa } = request.params;
     const {
-      nome, sobrenome, idade, login, senha, status, enderecos,
+      codigoPessoa, nome, sobrenome, idade, login, senha, status, enderecos,
     } = request.body as IUpdatePessoaDTO;
 
     const updatePessoaService = new UpdatePessoaService();

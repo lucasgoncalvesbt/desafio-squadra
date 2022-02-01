@@ -9,7 +9,7 @@ import { MunicipioRepository } from '../../repository/MunicipioRepository';
 class UpdateBairroService {
   async execute({
     codigoBairro, codigoMunicipio, nome, status,
-  }: IUpdateBairroDTO): Promise<Bairro> {
+  }: IUpdateBairroDTO): Promise<Bairro[]> {
     const bairroRepository = getCustomRepository(BairroRepository);
     const municipioRepository = getCustomRepository(MunicipioRepository);
 
@@ -39,9 +39,9 @@ class UpdateBairroService {
       status,
     });
 
-    const bairro = await bairroRepository.save(bairroToUpdate);
+    await bairroRepository.save(bairroToUpdate);
 
-    return bairro;
+    return bairroRepository.find();
   }
 }
 

@@ -6,7 +6,7 @@ import { AppError } from '../../errors/AppError';
 import { UfRepository } from '../../repository/UfRepository';
 
 class CreateUfService {
-  async execute({ nome, sigla, status }: ICreateUfDTO): Promise<Uf> {
+  async execute({ nome, sigla, status }: ICreateUfDTO): Promise<Uf[]> {
     const ufRepository = getCustomRepository(UfRepository);
 
     const ufWithNameExists = await ufRepository.createQueryBuilder()
@@ -33,7 +33,7 @@ class CreateUfService {
 
     await ufRepository.save(uf);
 
-    return uf;
+    return ufRepository.find();
   }
 }
 

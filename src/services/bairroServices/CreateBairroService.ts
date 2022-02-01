@@ -7,7 +7,7 @@ import { BairroRepository } from '../../repository/BairroRepository';
 import { MunicipioRepository } from '../../repository/MunicipioRepository';
 
 class CreateBairroService {
-  async execute({ codigoMunicipio, nome, status }: ICreateBairroDTO): Promise<Bairro> {
+  async execute({ codigoMunicipio, nome, status }: ICreateBairroDTO): Promise<Bairro[]> {
     const bairroRepository = getCustomRepository(BairroRepository);
     const municipioRepository = getCustomRepository(MunicipioRepository);
 
@@ -33,7 +33,7 @@ class CreateBairroService {
 
     await bairroRepository.save(bairro);
 
-    return bairro;
+    return bairroRepository.find();
   }
 }
 

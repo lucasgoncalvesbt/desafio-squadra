@@ -17,7 +17,7 @@ class UpdatePessoaService {
     senha,
     status,
     enderecos,
-  }: IUpdatePessoaDTO): Promise<Pessoa> {
+  }: IUpdatePessoaDTO): Promise<Pessoa[]> {
     const pessoaRepository = getCustomRepository(PessoaRepository);
     const enderecoRepository = getCustomRepository(EnderecoRepository);
     const bairroRepository = getCustomRepository(BairroRepository);
@@ -90,10 +90,9 @@ class UpdatePessoaService {
       return endereco;
     }));
 
-    const pessoa = await pessoaRepository.save(pessoaToUpdate);
-    pessoa.enderecos = enderecosUpdated;
+    await pessoaRepository.save(pessoaToUpdate);
 
-    return pessoa;
+    return pessoaRepository.find();
   }
 }
 

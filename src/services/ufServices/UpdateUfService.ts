@@ -6,7 +6,7 @@ import { AppError } from '../../errors/AppError';
 import { UfRepository } from '../../repository/UfRepository';
 
 class UpdateUfService {
-  async execute(codigoUf: number, { nome, sigla, status }: IUpdateUfDTO): Promise<Uf> {
+  async execute(codigoUf: number, { nome, sigla, status }: IUpdateUfDTO): Promise<Uf[]> {
     const ufRepository = getCustomRepository(UfRepository);
 
     const ufToUpdate = await ufRepository.findOne(codigoUf);
@@ -35,9 +35,9 @@ class UpdateUfService {
 
     ufRepository.merge(ufToUpdate, { nome, sigla, status });
 
-    const uf = await ufRepository.save(ufToUpdate);
+    await ufRepository.save(ufToUpdate);
 
-    return uf;
+    return ufRepository.find();
   }
 }
 

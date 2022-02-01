@@ -7,9 +7,9 @@ class DeletePessoaController {
     const { codigoPessoa } = request.params;
 
     const deletePessoaService = new DeletePessoaService();
-    await deletePessoaService.execute(Number(codigoPessoa));
+    const pessoas = await deletePessoaService.execute(Number(codigoPessoa));
 
-    return response.json();
+    return response.json(pessoas);
   }
 }
 

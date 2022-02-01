@@ -16,7 +16,7 @@ class CreatePessoaService {
     senha,
     status,
     enderecos,
-  }: ICreatePessoaDTO): Promise<Pessoa> {
+  }: ICreatePessoaDTO): Promise<Pessoa[]> {
     const pessoaRepository = getCustomRepository(PessoaRepository);
     const bairroRepository = getCustomRepository(BairroRepository);
     const enderecoRepository = getCustomRepository(EnderecoRepository);
@@ -57,9 +57,7 @@ class CreatePessoaService {
       return endereco;
     }));
 
-    pessoa.enderecos = enderecosSaved;
-
-    return pessoa;
+    return pessoaRepository.find();
   }
 }
 

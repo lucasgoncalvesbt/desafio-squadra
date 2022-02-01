@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { DeletePessoaController } from '../controllers/bairroControllers/DeletePessoaController';
 import { CreatePessoaController } from '../controllers/pessoaController/CreatePessoaController';
+import { DeletePessoaController } from '../controllers/pessoaController/DeletePessoaController';
 import { FindPessoaController } from '../controllers/pessoaController/FindPessoaController';
 import { UpdatePessoaController } from '../controllers/pessoaController/UpdatePessoaController';
 
@@ -14,7 +14,7 @@ const deletePessoaController = new DeletePessoaController();
 
 pessoaRoutes.get('/', findPessoaController.handle);
 pessoaRoutes.post('/', createPessoaController.handle);
-pessoaRoutes.put('/:codigoPessoa', updatePessoaController.handle);
+pessoaRoutes.put('/', updatePessoaController.handle);
 pessoaRoutes.delete('/:codigoPessoa', deletePessoaController.handle);
 
 export { pessoaRoutes };
